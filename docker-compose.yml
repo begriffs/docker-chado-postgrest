@@ -1,0 +1,17 @@
+postgrest:
+    image: erasche/postgrest
+    ports:
+        - "8300:8000"
+    environment:
+        POSTGRES_DB_NAME: postgres
+        SCHEMA: public
+        JWT_SECRET: secret
+        POOL_SIZE: 10
+    links:
+        - "chado:postgres"
+chado:
+    image: erasche/chado
+    volumes:
+        - "./chado:/var/lib/postgresql/9.4/"
+    ports:
+        - "5432:5432"
